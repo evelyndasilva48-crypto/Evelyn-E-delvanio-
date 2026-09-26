@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evelyn & Delvânio</title>
+    <!-- Importação de Fontes Românticas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f7f3ec;
+            color: #1a1a1a;
+            font-family: 'Montserrat', sans-serif;
+            padding: 40px 20px;
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- CORAÇÕES FLUTUANTES NO FUNDO --- */
+        .heart-bg {
+            position: fixed;
+            color: rgba(212, 142, 156, 0.45);
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.8) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Estrutura Central */
+        main.capa,
+        section.open-letter,
+        section.memories,
+        section.love-letter,
+        section.final-section {
+            max-width: 650px;
+            width: 100%;
+            margin: 0 auto 60px auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- NOME COM BRILHO / LUZES --- */
+        h1.glowing-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.8rem;
+            color: #2b1f1d;
+            margin-bottom: 10px;
+            animation: textGlow 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% {
+                text-shadow: 0 0 5px rgba(230, 180, 190, 0.4), 0 0 10px rgba(230, 180, 190, 0.2);
+            }
+            50% {
+                text-shadow: 0 0 15px rgba(220, 120, 140, 0.8), 0 0 25px rgba(255, 215, 0, 0.6), 0 0 35px rgba(220, 120, 140, 0.4);
+            }
+            100% {
+                text-shadow: 0 0 8px rgba(230, 180, 190, 0.5), 0 0 18px rgba(255, 215, 0, 0.5);
+            }
+        }
+
+        .linha {
+            width: 60px;
+            height: 1px;
+            background-color: #888888;
+            margin: 15px auto;
+        }
+
+        .subtitulo {
+            font-size: 0.95rem;
+            color: #555555;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-top: 10px;
+            line-height: 1.2;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #555555;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        /* Carta Aberta Inicial */
+        section.open-letter {
+            background-color: #efe8dc;
+            padding: 35px 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            text-align: left;
+        }
+
+        section.open-letter h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .open-letter-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #2a2a2a;
+        }
+
+        .open-letter-text p {
+            margin-bottom: 16px;
+        }
+
+        /* Frases de Intervalo */
+        .frase-intervalo {
+            background-color: #f0e8dc;
+            padding: 22px 18px;
+            border-radius: 12px;
+            margin: 35px 0;
+            border-left: 3px solid #c8a2a8;
+            border-right: 3px solid #c8a2a8;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .frase-intervalo p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #2a2a2a;
+            line-height: 1.5;
+        }
+
+        /* --- GALERIA DE FOTOS E VÍDEOS --- */
+        .photo-grid-mixed {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .photo-card {
+            background-color: #efe8dc;
+            padding: 14px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            animation: floatPhoto 4s ease-in-out infinite alternate;
+        }
+
+        .photo-card:nth-child(even) {
+            animation-duration: 5s;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes floatPhoto {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-8px) rotate(0.8deg);
+            }
+        }
+
+        .photo-card:active, .photo-card.active-tap {
+            transform: scale(1.04) translateY(-4px) !important;
+            box-shadow: 0 12px 25px rgba(200, 130, 140, 0.3);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: auto;
+            max-height: 380px;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            pointer-events: none;
+        }
+
+        /* Estilo para vídeos incorporados */
+        .video-container {
+            position: relative;
+            padding-bottom: 125%; /* Proporção ideal para vídeos do TikTok/CapCut */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Tamanho Grande (Ocupa a largura toda) */
+        .photo-card.photo-large {
+            grid-column: span 2;
+        }
+
+        .photo-card.photo-large img {
+            max-height: 480px;
+        }
+
+        /* Estilo Polaroid */
+        .photo-card.photo-polaroid {
+            background-color: #ffffff;
+            padding: 16px 16px 22px 16px;
+            border-radius: 6px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        }
+
+        .photo-card span {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #555555;
+            display: block;
+            margin-top: 12px;
+        }
+
+        /* ESTRELAS E BRILHOS */
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            font-size: 18px;
+            animation: sparkleAnim 0.8s forwards ease-out;
+            z-index: 10;
+        }
+
+        @keyframes sparkleAnim {
+            0% {
+                transform: translate(0, 0) scale(0.3) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        /* Carta de Amor Final */
+        section.love-letter {
+            background-color: #efe8dc;
+            padding: 40px 25px;
+            border-radius: 16px;
+        }
+
+        .letter {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #1a1a1a;
+            margin: 25px 0;
+        }
+
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #1a1a1a;
+        }
+
+        /* Secção Final */
+        .final-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: #1a1a1a;
+            display: block;
+            margin-top: 20px;
+            animation: textGlow 2.5s ease-in-out infinite alternate;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="hearts-container"></div>
+
+    <main class="capa">
+        <h1 class="glowing-title">Evelyn & Delvânio</h1>
+        <div class="linha"></div>
+        <p class="subtitulo">Our story in little pieces.</p>
+    </main>
+
+    <!-- CARTA ABERTA ANTES DA PRIMEIRA FOTO -->
+    <section class="open-letter">
+        <p class="section-label" style="text-align: center;">CARTA ABERTA AO MEU AMOR</p>
+        <h2>Metamorfose do Nosso Amor</h2>
+        <div class="open-letter-text">
+            <p>Amar-te nunca foi sobre estagnar no tempo, mas sim sobre aprender a caminhar juntos por todas as estações. Passámos por etapas, ultrapassámos fases, moldámos arestas e evoluímos a cada detalhe. Cada mudança trouxe maturidade; cada desafio acendeu a necessidade de sermos melhores — um para o outro e connosco próprios.</p>
+            <p>O nosso amor tem método e cumplicidade, mas traz também em si a chama viva e indomável da paixão. É o fogo que aquece nos dias difíceis e a luz que ilumina cada conquista. Que este espaço seja o reflexo do quanto já crescemos e da beleza inabalável de tudo o que ainda estamos por construir.</p>
+        </div>
+    </section>
+
+    <section class="memories">
+        <p class="section-label">OUR MEMORIES</p>
+        <h2>Little pieces<br>of us.</h2>
+
+        <!-- BLOCO 1 -->
+        <div class="photo-grid-mixed">
+            <div class="photo-card photo-large photo-polaroid" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/MxNg0Ps4/IMG-5304.jpg" alt="Foto 1">
+                <span>the beginning of us ♡</span>
+            </div>
+
+            <div class="photo-card photo-polaroid" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/JFmJrkjB/IMG-6001.jpg" alt="Foto 2">
+                <span>sweet smiles</span>
+            </div>
+
+            <div class="photo-card photo-polaroid" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/hR73NHMn/IMG-7288.jpg" alt="Foto 3">
+                <span>just you & me</span>
+            </div>
+        </div>
+
+        <!-- VÍDEO 1 -->
+        <div style="margin-top: 30px;">
+            <div class="photo-card photo-large photo-polaroid" onclick="createSparkles(event, this)">
+                <div class="video-container">
+                    <iframe src="https://streamable.com/e/nrx5lo" allowfullscreen></iframe>
+                </div>
+                <span>our special moments in video 🎬</span>
+            </div>
+        </div>
+
+        <!-- PRIMEIRA FRASE DE INTERVALO -->
+        <div class="frase-intervalo">
+            <p>“Em cada detalhe do teu olhar, encontrei a paz que o meu coração sempre procurou.”</p>
+        </div>
+
+        <!-- BLOCO 2 -->
+        <div class="photo-grid-mixed">
+            <div class="photo-card" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/ccLcNbMd/IMG-9220.jpg" alt="Foto 4">
+                <span>favourite memory</span>
+            </div>
+
+            <div class="photo-card" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/j2NGQDX/IMG-5586.jpg" alt="Foto 5">
+                <span>my happy place</span>
+            </div>
+
+            <div class="photo-card photo-large" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/zhqRthBL/IMG-4024.jpg" alt="Foto 6">
+                <span>unforgettable moments</span>
+            </div>
+        </div>
+
+        <!-- VÍDEO 2 (NOVO) -->
+        <div style="margin-top: 30px;">
+            <div class="photo-card photo-large photo-polaroid" onclick="createSparkles(event, this)">
+                <div class="video-container">
+                    <iframe src="https://streamable.com/e/kk6cj6" allowfullscreen></iframe>
+                </div>
+                <span>sparks & laughter 🔥</span>
+            </div>
+        </div>
+
+        <!-- SEGUNDA FRASE DE INTERVALO -->
+        <div class="frase-intervalo">
+            <p>“O amor não é sobre contar os dias, mas sim fazer com que cada dia valha a pena.”</p>
+        </div>
+
+        <!-- BLOCO 3 -->
+        <div class="photo-grid-mixed">
+            <div class="photo-card photo-polaroid" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/Cs1Db45k/IMG-2687.jpg" alt="Foto 7">
+                <span>pure love</span>
+            </div>
+
+            <div class="photo-card photo-polaroid" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/b5w7G8Jh/8e4664b6-6e4e-4bc1-a860-b45c737b7ad0.jpg" alt="Foto 8">
+                <span>always together</span>
+            </div>
+
+            <div class="photo-card" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/4RvjYj1F/IMG-3816.jpg" alt="Foto 9">
+                <span>little adventures</span>
+            </div>
+
+            <div class="photo-card photo-polaroid" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/Dg68H8F4/IMG-9131.jpg" alt="Foto 10">
+                <span>special days</span>
+            </div>
+        </div>
+
+        <!-- VÍDEO 3 (NOVO) -->
+        <div style="margin-top: 30px;">
+            <div class="photo-card photo-large photo-polaroid" onclick="createSparkles(event, this)">
+                <div class="video-container">
+                    <iframe src="https://streamable.com/e/vfc8ds" allowfullscreen></iframe>
+                </div>
+                <span>pure passion in motion ✨</span>
+            </div>
+        </div>
+
+        <!-- TERCEIRA FRASE DE INTERVALO -->
+        <div class="frase-intervalo">
+            <p>“E entre tantas histórias no mundo, a nossa é a minha preferida.”</p>
+        </div>
+
+        <!-- BLOCO 4 -->
+        <div class="photo-grid-mixed">
+            <div class="photo-card" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/pBT2Vm0S/IMG-7382.jpg" alt="Foto 11">
+                <span>holding hands</span>
+            </div>
+
+            <div class="photo-card" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/m5w6wvLk/IMG-7748.jpg" alt="Foto 12">
+                <span>golden moments</span>
+            </div>
+
+            <div class="photo-card photo-polaroid" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/wZhwGGLd/a7b53aa4-983a-4814-83a2-42c3a2cf5921.jpg" alt="Foto 13">
+                <span>making memories</span>
+            </div>
+
+            <div class="photo-card photo-polaroid" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/01KVyGB/IMG-3327.jpg" alt="Foto 14">
+                <span>side by side</span>
+            </div>
+        </div>
+
+        <!-- VÍDEO 4 -->
+        <div style="margin-top: 30px;">
+            <div class="photo-card photo-large photo-polaroid" onclick="createSparkles(event, this)">
+                <div class="video-container">
+                    <iframe src="https://streamable.com/e/nyijp1" allowfullscreen></iframe>
+                </div>
+                <span>forever & always in motion ♡</span>
+            </div>
+        </div>
+
+        <!-- FOTO FINAL DA GALERIA -->
+        <div style="margin-top: 20px;">
+            <div class="photo-card photo-large photo-polaroid" onclick="createSparkles(event, this)">
+                <img src="https://i.ibb.co/0pskLqwg/IMG-5315.jpg" alt="Foto 15">
+                <span>forever & always ♡</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARTA DE AMOR FINAL -->
+    <section class="love-letter">
+        <p class="section-label">A LITTLE LETTER</p>
+        <h2>For you,<br>my love.</h2>
+
+        <p class="letter">
+            Entre tantos dias, tantas conversas e tantos momentos, existe uma coisa que permanece: a nossa história. E talvez seja isso que torna tudo tão especial.
+        </p>
+
+        <p class="signature">- Evelyn ♡</p>
+    </section>
+
+    <section class="final-section">
+        <p class="section-label">OUR STORY IS STILL BEING WRITTEN</p>
+        <h2>And I hope<br>there's always<br>an us.</h2>
+        <span class="final-names">Evelyn & Delvânio</span>
+    </section>
+
+    <!-- SCRIPT DE EFEITOS -->
+    <script>
+        // Corações flutuantes no fundo
+        const heartsContainer = document.getElementById('hearts-container');
+        const heartIcons = ['♡', '♥️', '💕', '✨'];
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 15 + 14) + 'px';
+            heart.style.animationDuration = (Math.random() * 6 + 6) + 's';
+
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 12000);
+        }
+
+        setInterval(createHeart, 800);
+        for(let i=0; i<8; i++) createHeart();
+
+        // Estrelas ao clicar
+        function createSparkles(event, card) {
+            card.classList.add('active-tap');
+            setTimeout(() => card.classList.remove('active-tap'), 300);
+
+            const rect = card.getBoundingClientRect();
+            const clickX = event.clientX ? event.clientX - rect.left : rect.width / 2;
+            const clickY = event.clientY ? event.clientY - rect.top : rect.height / 2;
+
+            const sparkleIcons = ['✨', '⭐', '💫', '💖', '✨'];
+
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('span');
+                sparkle.classList.add('sparkle');
+                sparkle.innerText = sparkleIcons[Math.floor(Math.random() * sparkleIcons.length)];
+
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 60 + 30;
+                const dx = Math.cos(angle) * distance + 'px';
+                const dy = Math.sin(angle) * distance + 'px';
+
+                sparkle.style.setProperty('--dx', dx);
+                sparkle.style.setProperty('--dy', dy);
+                sparkle.style.left = clickX + 'px';
+                sparkle.style.top = clickY + 'px';
+
+                card.appendChild(sparkle);
+
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 800);
+            }
+        }
+    </script>
+</body>
+</html>
